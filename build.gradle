@@ -14,7 +14,13 @@ repositories {
 
 dependencies {
   testCompile 'org.testng:testng:6.9.9'
+
   compile 'org.assertj:assertj-core:2.0.0'
+
+  //DB
+  compile 'hsqldb:hsqldb:1.8.0.10'
+  compile 'org.postgresql:postgresql:9.4-1205-jdbc42'
+
 }
 
 test { useTestNG() }
