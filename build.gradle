@@ -1,0 +1,20 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'maven'
+
+group = "kz.greetgo.libase"
+version = "0.0.1"
+
+sourceSets.main.java.srcDirs = ['src', 'src_resources']
+sourceSets.test.java.srcDirs = ['test_src', 'test_src_resources']
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  testCompile 'org.testng:testng:6.9.9'
+  compile 'org.assertj:assertj-core:2.0.0'
+}
+
+test { useTestNG() }
