@@ -20,6 +20,7 @@ dependencies {
   //DB
   compile 'hsqldb:hsqldb:1.8.0.10'
   compile 'org.postgresql:postgresql:9.4-1205-jdbc42'
+  compile 'com.h2database:h2:1.4.190'
 
 }
 
