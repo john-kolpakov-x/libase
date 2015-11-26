@@ -1,15 +1,15 @@
-package kz.greetgo.libase;
+package kz.greetgo.libase.dialects;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PostgresDialect extends AbstractSqlDialect {
+public class SqlDialectH2 extends AbstractSqlDialect {
   @Override
   public boolean isTableExist(String tableName, Connection connection) throws SQLException {
     try (PreparedStatement ps = connection.prepareStatement("select 1" +
-      " from information_schema.tables where table_schema = 'public' and table_name = ?")) {
+      " from information_schema.tables where table_schema = 'PUBLIC' and table_name = ?")) {
 
       ps.setString(1, tableName);
 

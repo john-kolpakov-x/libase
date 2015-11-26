@@ -1,11 +1,13 @@
 package kz.greetgo.libase.test_util;
 
+import kz.greetgo.libase.DbType;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-class DbAccessorH2 implements DbAccessor {
+class DbAccessorH2 extends DbAccessorAbstract {
 
   @Override
   public void cleanDb() throws Exception {
@@ -36,5 +38,10 @@ class DbAccessorH2 implements DbAccessor {
         }
       }
     }
+  }
+
+  @Override
+  public DbType dbType() {
+    return DbType.H2;
   }
 }

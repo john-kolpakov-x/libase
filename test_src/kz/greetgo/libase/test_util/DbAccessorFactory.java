@@ -1,5 +1,7 @@
 package kz.greetgo.libase.test_util;
 
+import kz.greetgo.libase.DbType;
+
 public class DbAccessorFactory {
 
   public String dbName = "default_db";

@@ -1,5 +1,6 @@
 package kz.greetgo.libase.test_util;
 
+import kz.greetgo.libase.DbType;
 import org.postgresql.util.PSQLException;
 
 import java.sql.Connection;
@@ -7,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.regex.Pattern;
 
-class DbAccessorPostgres implements DbAccessor {
+class DbAccessorPostgres extends DbAccessorAbstract {
   private static final Pattern DOES_NOT_EXISTS = Pattern.compile("(role|database).+does\\s+not\\s+exist");
   private static final Pattern LEFT_PASSWORD = Pattern.compile("password authentication failed");
   private final String dbName;
@@ -94,4 +95,8 @@ class DbAccessorPostgres implements DbAccessor {
     }
   }
 
+  @Override
+  public DbType dbType() {
+    return DbType.POSTGRES;
+  }
 }
