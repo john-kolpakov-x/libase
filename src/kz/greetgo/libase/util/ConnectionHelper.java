@@ -23,8 +23,19 @@ public class ConnectionHelper implements AutoCloseable {
       setParams(ps, sqlParams);
 
       try (ResultSet rs = ps.executeQuery()) {
-        if (!rs.next()) throw new RuntimeException("No Data");
+        if (!rs.next()) throw new NoData();
         return rs.getInt(1);
+      }
+    }
+  }
+
+  public String oneStrOrFail(String sql, Object... sqlParams) throws SQLException {
+    try (PreparedStatement ps = connection.prepareStatement(sql)) {
+      setParams(ps, sqlParams);
+
+      try (ResultSet rs = ps.executeQuery()) {
+        if (!rs.next()) throw new NoData();
+        return rs.getString(1);
       }
     }
   }
@@ -62,6 +73,16 @@ public class ConnectionHelper implements AutoCloseable {
     try (PreparedStatement ps = prepareStatement(sql)) {
       setParams(ps, sqlParams);
       return ps.executeUpdate();
+    }
+  }
+
+  public boolean hasAnyRow(String sql, Object... sqlParams) throws SQLException {
+    try (PreparedStatement ps = connection.prepareStatement(sql)) {
+      setParams(ps, sqlParams);
+
+      try (ResultSet rs = ps.executeQuery()) {
+        return rs.next();
+      }
     }
   }
 }

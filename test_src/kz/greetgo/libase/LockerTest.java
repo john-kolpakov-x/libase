@@ -18,7 +18,7 @@ public class LockerTest {
 
   private final DbAccessorFactory dbAccessorFactory = new DbAccessorFactory();
 
-  private final Config config = new Config();
+  private final LibaseConfig config = new ConfigForTests();
 
   @DataProvider
   public Object[][] connectionDataProvider() {

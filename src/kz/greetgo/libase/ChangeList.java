@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ChangeList implements Iterable<DbChange> {
+public class ChangeList implements ChangeIterable {
 
   private final List<ChangeIterable> list = new ArrayList<>();
 
@@ -17,7 +17,8 @@ public class ChangeList implements Iterable<DbChange> {
 
       @Override
       public boolean hasNext() {
-        return parentIterator.hasNext();
+        if (currentIterator == null) return parentIterator.hasNext();
+        return currentIterator.hasNext() || parentIterator.hasNext();
       }
 
       @Override

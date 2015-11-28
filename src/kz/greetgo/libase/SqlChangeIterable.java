@@ -26,7 +26,9 @@ public class SqlChangeIterable implements ChangeIterable {
 
       @Override
       public DbChange next() {
-        return new SqlChange(sqls[index], group, author, prefix + index);
+        SqlChange ret = new SqlChange(sqls[index], group, author, prefix + index);
+        index++;
+        return ret;
       }
 
       @Override

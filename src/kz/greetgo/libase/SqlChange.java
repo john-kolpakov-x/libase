@@ -3,17 +3,16 @@ package kz.greetgo.libase;
 import kz.greetgo.libase.util.ConnectionHelper;
 import kz.greetgo.libase.util.Md5Util;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-public class SqlChange implements DbChange {
+class SqlChange implements DbChange {
   private final String sql;
   private final String group;
   private final String author;
   private final String id;
 
   public SqlChange(String sql, String group, String author, String id) {
-    this.sql = sql;
+    this.sql = sql.trim();
     this.group = group;
     this.author = author;
     this.id = id;
@@ -49,5 +48,10 @@ public class SqlChange implements DbChange {
   @Override
   public String identityStr() {
     return group + "-" + author + "-" + id;
+  }
+
+  @Override
+  public String toString() {
+    return "SqlChange(" + sql + ")";
   }
 }
