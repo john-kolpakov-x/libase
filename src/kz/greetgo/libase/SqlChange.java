@@ -47,7 +47,7 @@ class SqlChange implements DbChange {
 
   @Override
   public String identityStr() {
-    return group + "-" + author + "-" + id;
+    return group + '/' + id + " by " + author;
   }
 
   @Override

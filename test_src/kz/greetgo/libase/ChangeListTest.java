@@ -38,7 +38,7 @@ public class ChangeListTest {
 
     @Override
     public String identityStr() {
-      return null;
+      return name;
     }
 
     public final String name;

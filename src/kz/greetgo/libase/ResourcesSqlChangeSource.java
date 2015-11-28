@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ResourcesSqlChangeSource implements ChangeIterable {
 
@@ -54,7 +56,16 @@ public class ResourcesSqlChangeSource implements ChangeIterable {
             sb.append(line).append("\n");
           }
 
-          sqls = sb.toString().split(";;");
+          List<String> sqlList = new LinkedList<>();
+          for (String sql : sb.toString().split(";;")) {
+            String sql1 = sql.trim();
+            if (sql1.length() > 0) {
+              sqlList.add(sql1);
+            }
+          }
+
+
+          sqls = sqlList.toArray(new String[sqlList.size()]);
 
         } catch (IOException e) {
           throw new RuntimeException(e);
