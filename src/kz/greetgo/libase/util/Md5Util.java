@@ -1,4 +1,4 @@
-package kz.greetgo.libase;
+package kz.greetgo.libase.util;
 
 import sun.misc.BASE64Encoder;
 

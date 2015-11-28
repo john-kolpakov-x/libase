@@ -1,5 +1,7 @@
 package kz.greetgo.libase.dialects;
 
+import kz.greetgo.libase.util.ConnectionHelper;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,8 +9,8 @@ import java.sql.SQLException;
 
 public class SqlDialectPostgres extends AbstractSqlDialect {
   @Override
-  public boolean isTableExist(String tableName, Connection connection) throws SQLException {
-    try (PreparedStatement ps = connection.prepareStatement("select 1" +
+  public boolean isTableExist(String tableName, ConnectionHelper connection) throws SQLException {
+    try (PreparedStatement ps = connection.connection.prepareStatement("select 1" +
       " from information_schema.tables where table_schema = 'public' and table_name = ?")) {
 
       ps.setString(1, tableName);
@@ -39,4 +41,10 @@ public class SqlDialectPostgres extends AbstractSqlDialect {
   public String currentTimestamp() {
     return "current_timestamp";
   }
+
+  @Override
+  public void lockTable(ConnectionHelper connection, String tableName) throws SQLException {
+    connection.exec("lock table " + tableName + " in exclusive mode");
+  }
+
 }

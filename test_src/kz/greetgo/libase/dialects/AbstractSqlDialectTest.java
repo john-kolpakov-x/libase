@@ -4,12 +4,9 @@ import kz.greetgo.libase.DbType;
 import kz.greetgo.libase.SqlDialect;
 import kz.greetgo.libase.test_util.DbAccessor;
 import kz.greetgo.libase.test_util.DbAccessorFactory;
+import kz.greetgo.libase.util.ConnectionHelper;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -64,9 +61,9 @@ public class AbstractSqlDialectTest {
 
     SqlDialect dia = AbstractSqlDialect.createBy(dba.dbType());
 
-    try (Connection connection = dba.getConnection()) {
+    try (ConnectionHelper connection = dba.getConnection()) {
 
-      exec(connection, "create table \"asd\" (id int)");
+      connection.exec("create table \"asd\" (id int)");
 
       assertThat(dia.isTableExist("asd", connection)).isTrue();
 
@@ -74,9 +71,4 @@ public class AbstractSqlDialectTest {
 
   }
 
-  private void exec(Connection connection, String sql) throws SQLException {
-    try (PreparedStatement ps = connection.prepareStatement(sql)) {
-      ps.executeUpdate();
-    }
-  }
 }

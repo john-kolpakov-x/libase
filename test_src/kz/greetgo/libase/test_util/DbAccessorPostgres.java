@@ -1,6 +1,7 @@
 package kz.greetgo.libase.test_util;
 
 import kz.greetgo.libase.DbType;
+import kz.greetgo.libase.util.ConnectionHelper;
 import org.postgresql.util.PSQLException;
 
 import java.sql.Connection;
@@ -58,7 +59,7 @@ class DbAccessorPostgres extends DbAccessorAbstract {
   }
 
   @Override
-  public Connection getConnection() throws Exception {
+  public ConnectionHelper getConnection() throws Exception {
 
     Class.forName("org.postgresql.Driver");
 
@@ -79,18 +80,18 @@ class DbAccessorPostgres extends DbAccessorAbstract {
     return true;
   }
 
-  private Connection connectTo() throws Exception {
+  private ConnectionHelper connectTo() throws Exception {
     String host = System.getenv("PG_HOST");
     String port = System.getenv("PG_PORT");
 
     String url = String.format("jdbc:postgresql://%s:%s/%s", host, port, dbName);
 
-    return DriverManager.getConnection(url, dbName, dbName);
+    return new ConnectionHelper(DriverManager.getConnection(url, dbName, dbName));
   }
 
   public static void main(String[] args) throws Exception {
     DbAccessorPostgres x = new DbAccessorPostgres("asd_111");
-    try (Connection con = x.getConnection()) {
+    try (ConnectionHelper con = x.getConnection()) {
       System.out.println(con);
     }
   }

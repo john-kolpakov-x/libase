@@ -4,6 +4,7 @@ import kz.greetgo.libase.DbType;
 import kz.greetgo.libase.DetectDbType;
 import kz.greetgo.libase.test_util.DbAccessor;
 import kz.greetgo.libase.test_util.DbAccessorFactory;
+import kz.greetgo.libase.util.ConnectionHelper;
 import org.testng.annotations.Test;
 
 import java.sql.Connection;
@@ -18,9 +19,9 @@ public class DetectDialectTest {
   public void byConnection_postgres() throws Exception {
     DbAccessor dba = connectionFactory.createDbAccessor(DbType.POSTGRES);
 
-    try (Connection connection = dba.getConnection()) {
+    try (ConnectionHelper connection = dba.getConnection()) {
 
-      DbType dbType = DetectDbType.byConnection(connection);
+      DbType dbType = DetectDbType.byConnection(connection.connection);
 
       assertThat(dbType).isEqualTo(DbType.POSTGRES);
 
@@ -31,9 +32,9 @@ public class DetectDialectTest {
   public void byConnection_h2() throws Exception {
     DbAccessor dba = connectionFactory.createDbAccessor(DbType.H2);
 
-    try (Connection connection = dba.getConnection()) {
+    try (ConnectionHelper connection = dba.getConnection()) {
 
-      DbType dbType = DetectDbType.byConnection(connection);
+      DbType dbType = DetectDbType.byConnection(connection.connection);
 
       assertThat(dbType).isEqualTo(DbType.H2);
 
@@ -45,9 +46,9 @@ public class DetectDialectTest {
   public void byConnection_hsqldb() throws Exception {
     DbAccessor dba = connectionFactory.createDbAccessor(DbType.HSQLDB);
 
-    try (Connection connection = dba.getConnection()) {
+    try (ConnectionHelper connection = dba.getConnection()) {
 
-      DbType dbType = DetectDbType.byConnection(connection);
+      DbType dbType = DetectDbType.byConnection(connection.connection);
 
       assertThat(dbType).isEqualTo(DbType.HSQLDB);
 

@@ -1,5 +1,7 @@
 package kz.greetgo.libase;
 
+import kz.greetgo.libase.util.ConnectionHelper;
+
 import java.sql.Connection;
 
 public interface DbChange {
@@ -11,7 +13,7 @@ public interface DbChange {
 
   String hash();
 
-  void apply(Connection connection) throws Exception;
+  void apply(ConnectionHelper connection) throws Exception;
 
   String identityStr();
 }

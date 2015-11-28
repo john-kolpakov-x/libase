@@ -1,6 +1,7 @@
 package kz.greetgo.libase.test_util;
 
 import kz.greetgo.libase.DbType;
+import kz.greetgo.libase.util.ConnectionHelper;
 
 import java.security.SecureRandom;
 import java.sql.Connection;
@@ -27,14 +28,14 @@ class DbAccessorHSQLDB extends DbAccessorAbstract {
   }
 
   @Override
-  public Connection getConnection() throws Exception {
+  public ConnectionHelper getConnection() throws Exception {
     Class.forName("org.hsqldb.jdbcDriver");
-    return DriverManager.getConnection("jdbc:hsqldb:mem:xx" + db + "-" + id, "sa", "");
+    return new ConnectionHelper(DriverManager.getConnection("jdbc:hsqldb:mem:xx" + db + "-" + id, "sa", ""));
   }
 
   public static void main(String[] args) throws Exception {
     DbAccessorHSQLDB da = new DbAccessorHSQLDB("asd");
-    try (Connection connection = da.getConnection()) {
+    try (ConnectionHelper connection = da.getConnection()) {
       try (PreparedStatement ps = connection.prepareStatement("create table asd2(id1 int, name1 varchar(100))")) {
         ps.executeUpdate();
       }
@@ -43,7 +44,7 @@ class DbAccessorHSQLDB extends DbAccessorAbstract {
       }
     }
 
-    try (Connection connection = da.getConnection()) {
+    try (ConnectionHelper connection = da.getConnection()) {
       try (PreparedStatement ps = connection.prepareStatement("select * from asd2")) {
         try (ResultSet rs = ps.executeQuery()) {
           while (rs.next()) {

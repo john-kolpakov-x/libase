@@ -1,5 +1,7 @@
 package kz.greetgo.libase;
 
+import kz.greetgo.libase.util.ConnectionHelper;
+
 import java.sql.*;
 import java.util.Calendar;
 
@@ -32,9 +34,9 @@ public class Context {
     }
   }
 
-  private Connection connection;
+  private ConnectionHelper connection;
 
-  public void applyTo(Connection connection) throws Exception {
+  public void applyTo(ConnectionHelper connection) throws Exception {
     this.connection = connection;
 
     makeChangeTableExistence();

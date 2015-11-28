@@ -1,5 +1,8 @@
 package kz.greetgo.libase;
 
+import kz.greetgo.libase.util.ConnectionHelper;
+import kz.greetgo.libase.util.Md5Util;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -37,7 +40,7 @@ public class SqlChange implements DbChange {
   }
 
   @Override
-  public void apply(Connection connection) throws Exception {
+  public void apply(ConnectionHelper connection) throws Exception {
     try (PreparedStatement ps = connection.prepareStatement(sql)) {
       ps.executeUpdate();
     }
