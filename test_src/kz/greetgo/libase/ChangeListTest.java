@@ -32,7 +32,7 @@ public class ChangeListTest {
     }
 
     @Override
-    public void apply(ConnectionHelper connection) throws Exception {
+    public void apply(ConnectionHelper connectionHelper) throws Exception {
 
     }
 

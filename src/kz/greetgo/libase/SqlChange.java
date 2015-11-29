@@ -39,8 +39,8 @@ class SqlChange implements DbChange {
   }
 
   @Override
-  public void apply(ConnectionHelper connection) throws Exception {
-    try (PreparedStatement ps = connection.prepareStatement(sql)) {
+  public void apply(ConnectionHelper connectionHelper) throws Exception {
+    try (PreparedStatement ps = connectionHelper.prepareStatement(sql)) {
       ps.executeUpdate();
     }
   }

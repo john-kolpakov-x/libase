@@ -2,6 +2,10 @@ package kz.greetgo.libase;
 
 public abstract class LibaseConfig {
 
+  public abstract int tryLockCount();
+
+  public abstract long millisToWaitNextTryToLock();
+
   public abstract String changeTable();
 
   public abstract String changeFieldGroup();
@@ -25,61 +29,74 @@ public abstract class LibaseConfig {
   public abstract String lockLastLockedAt();
 
   public static LibaseConfig defaults() {
-    return new LibaseConfig() {
-      @Override
-      public String changeTable() {
-        return "gg_db_change";
-      }
+    return new Defaults();
+  }
 
-      @Override
-      public String changeFieldGroup() {
-        return "group";
-      }
+  public static class Defaults extends LibaseConfig {
 
-      @Override
-      public String changeFieldAuthor() {
-        return "author";
-      }
+    @Override
+    public int tryLockCount() {
+      return 10;
+    }
 
-      @Override
-      public String changeFieldId() {
-        return "id";
-      }
+    @Override
+    public long millisToWaitNextTryToLock() {
+      return 1000;
+    }
 
-      @Override
-      public String changeFieldHash() {
-        return "hash";
-      }
+    @Override
+    public String changeTable() {
+      return "gg_db_change";
+    }
 
-      @Override
-      public String changeFieldExecutionMillis() {
-        return "execution_millis";
-      }
+    @Override
+    public String changeFieldGroup() {
+      return "group";
+    }
 
-      @Override
-      public String changeFieldExecutedAt() {
-        return "executed_at";
-      }
+    @Override
+    public String changeFieldAuthor() {
+      return "author";
+    }
 
-      @Override
-      public String lockTable() {
-        return "gg_db_change_lock";
-      }
+    @Override
+    public String changeFieldId() {
+      return "id";
+    }
 
-      @Override
-      public String lockName() {
-        return "name";
-      }
+    @Override
+    public String changeFieldHash() {
+      return "hash";
+    }
 
-      @Override
-      public String lockFlag() {
-        return "flag";
-      }
+    @Override
+    public String changeFieldExecutionMillis() {
+      return "execution_millis";
+    }
 
-      @Override
-      public String lockLastLockedAt() {
-        return "last_locked_at";
-      }
-    };
+    @Override
+    public String changeFieldExecutedAt() {
+      return "executed_at";
+    }
+
+    @Override
+    public String lockTable() {
+      return "gg_db_change_lock";
+    }
+
+    @Override
+    public String lockName() {
+      return "name";
+    }
+
+    @Override
+    public String lockFlag() {
+      return "flag";
+    }
+
+    @Override
+    public String lockLastLockedAt() {
+      return "last_locked_at";
+    }
   }
 }

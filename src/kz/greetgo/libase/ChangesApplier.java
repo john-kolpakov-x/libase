@@ -2,8 +2,12 @@ package kz.greetgo.libase;
 
 import kz.greetgo.libase.util.ConnectionHelper;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ChangesApplier {
 
@@ -17,11 +21,11 @@ public class ChangesApplier {
     this.connection = connection;
   }
 
-  public void apply(ChangeCollector changeCollector) throws Exception {
+  public void apply(ChangeIterable changeIterable) throws Exception {
 
-    makeChangeTableExistence();
+    ensureChangeTableExistence();
 
-    for (DbChange dbChange : changeCollector.changeList) {
+    for (DbChange dbChange : changeIterable) {
 
       if (wasDbChangeExecuted(dbChange)) {
         checkHash(dbChange);
@@ -31,6 +35,8 @@ public class ChangesApplier {
 
     }
   }
+
+  private final static Logger LOGGER = Logger.getLogger(Libase.class.getName());
 
   private void applyDbChange(DbChange dbChange) throws Exception {
 
@@ -42,7 +48,7 @@ public class ChangesApplier {
 
   }
 
-  private void makeChangeTableExistence() throws SQLException {
+  private void ensureChangeTableExistence() throws SQLException {
     if (!dialect.isTableExist(config.changeTable(), connection)) {
       createDbChangeTable();
     }
@@ -74,6 +80,9 @@ public class ChangesApplier {
       ps.executeUpdate();
     }
 
+    if (LOGGER.isLoggable(Level.INFO)) {
+      LOGGER.info("Applied " + dbChange.identityStr() + " for " + executionTime + " millis");
+    }
   }
 
   private static String quote(String str) {

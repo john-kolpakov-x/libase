@@ -13,7 +13,7 @@ public interface DbChange {
 
   String hash();
 
-  void apply(ConnectionHelper connection) throws Exception;
+  void apply(ConnectionHelper connectionHelper) throws Exception;
 
   String identityStr();
 }

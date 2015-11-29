@@ -37,13 +37,13 @@ public class ChangesApplierTest {
     cc.toGroup("asd").sqls("me", "wow-1", "create table asd1(id int)");
 
     try (ConnectionHelper connection = dbAccessor.getConnection()) {
-      new ChangesApplier(config, sqlDialect, connection).apply(cc);
+      new ChangesApplier(config, sqlDialect, connection).apply(cc.changeList);
     }
 
     cc.toGroup("asd").sqls("me", "wow-2", "create table asd2(id int)");
 
     try (ConnectionHelper connection = dbAccessor.getConnection()) {
-      new ChangesApplier(config, sqlDialect, connection).apply(cc);
+      new ChangesApplier(config, sqlDialect, connection).apply(cc.changeList);
     }
 
     assertThat(1);

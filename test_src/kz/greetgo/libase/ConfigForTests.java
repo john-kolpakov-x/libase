@@ -1,6 +1,17 @@
 package kz.greetgo.libase;
 
 public class ConfigForTests extends LibaseConfig {
+
+  @Override
+  public int tryLockCount() {
+    return 3;
+  }
+
+  @Override
+  public long millisToWaitNextTryToLock() {
+    return 200;
+  }
+
   @Override
   public String changeTable() {
     return "gg_db_change";
