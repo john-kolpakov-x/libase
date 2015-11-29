@@ -24,7 +24,7 @@ public class ChangesApplierTest {
     for (DbType dbType : DbType.values()) {
       ret.add(new Object[]{dbAccessorFactory.createDbAccessor(dbType), AbstractSqlDialect.createBy(dbType)});
     }
-
+ 
     return ret.toArray(new Object[ret.size()][]);
   }
 

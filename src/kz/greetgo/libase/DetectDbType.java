@@ -1,7 +1,5 @@
 package kz.greetgo.libase;
 
-import kz.greetgo.libase.DbType;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 

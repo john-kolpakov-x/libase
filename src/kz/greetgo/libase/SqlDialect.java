@@ -2,7 +2,6 @@ package kz.greetgo.libase;
 
 import kz.greetgo.libase.util.ConnectionHelper;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public interface SqlDialect {

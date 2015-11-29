@@ -1,13 +1,9 @@
 package kz.greetgo.libase;
 
-import kz.greetgo.libase.DbType;
-import kz.greetgo.libase.DetectDbType;
 import kz.greetgo.libase.test_util.DbAccessor;
 import kz.greetgo.libase.test_util.DbAccessorFactory;
 import kz.greetgo.libase.util.ConnectionHelper;
 import org.testng.annotations.Test;
-
-import java.sql.Connection;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,7 +36,6 @@ public class DetectDialectTest {
 
     }
   }
-
 
   @Test
   public void byConnection_hsqldb() throws Exception {

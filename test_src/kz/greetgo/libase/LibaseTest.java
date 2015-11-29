@@ -10,9 +10,7 @@ import java.io.ByteArrayInputStream;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Formatter;
 import java.util.logging.LogManager;
-import java.util.logging.LogRecord;
 
 public class LibaseTest {
 
