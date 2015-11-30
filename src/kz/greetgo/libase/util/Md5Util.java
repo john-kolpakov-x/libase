@@ -1,9 +1,8 @@
 package kz.greetgo.libase.util;
 
-import sun.misc.BASE64Encoder;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 public class Md5Util {
   public static String strToMd5(String str) {
@@ -26,6 +25,6 @@ public class Md5Util {
 
   private static String strToMd5Inner(String str) throws Exception {
     byte[] bytes = MD5.digest(str.getBytes("UTF-8"));
-    return new BASE64Encoder().encode(bytes);
+    return Base64.getEncoder().encodeToString(bytes);
   }
 }
